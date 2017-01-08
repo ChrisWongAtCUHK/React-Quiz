@@ -11,11 +11,8 @@ const quizReducers = handleActions({
 			// do nothing with the same quiz
 			return state;
 		}
-		let retState = state.set('quiz', state.get('quiz')
-			.set('Id', payload.Id)
-			.set('name', payload.name)
-		);								
-		console.log(retState.get('quiz').get('Id'));
+		let retState = state.setIn("quiz.Id".split("."), payload.Id)
+												.setIn("quiz.name".split("."), payload.name);
 		return retState;								
 	},
 	CHANGE_MODE: (state, { payload }) => {
