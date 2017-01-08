@@ -4,14 +4,16 @@ import {
 	changeQuizName, 
 	changeMode 
 } from '../actions';
-import { loadQuiz } from '../constants/quizCtrl';
 
 export default connect(
 	(state) => ({
 		quizName: state.getIn(['quizReducers', 'quizName']),
-		quiz: loadQuiz(state.getIn(['quizReducers', 'quizName']), state.getIn(['quizReducers', 'quiz']))
+		quiz: state.getIn(['quizReducers', 'quiz'])
 	}),	
 	(dispatch) => ({
+		onLoadQuiz: (quizName) => {
+			dispatch(changeQuizName(quizName));									
+		},
 		onChangeQuizName: (event) => {
 			dispatch(changeQuizName(event.target.value));									
 		},

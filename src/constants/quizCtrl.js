@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-export const loadQuiz = (file, quiz) => {
+export const loadQuiz = (file) => {
 	// http get to the file
 	axios.get(file)
 			 .then(res => {
-					quiz.set('quiz', res.data);
+					console.log(res.data);
 			 });
-	return quiz;
 }
