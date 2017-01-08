@@ -8,7 +8,8 @@ import { loadQuiz } from '../constants/quizCtrl';
 
 export default connect(
 	(state) => ({
-		quizName: loadQuiz(state.getIn(['quizReducers', 'quizName']))
+		quizName: state.getIn(['quizReducers', 'quizName']),
+		quiz: loadQuiz(state.getIn(['quizReducers', 'quizName']), state.getIn(['quizReducers', 'quiz']))
 	}),	
 	(dispatch) => ({
 		onChangeQuizName: (event) => {
