@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import Quiz from '../components/Quiz';
 import { 
-	changeQuizName, 
+	changeQuiz, 
 	changeMode 
 } from '../actions';
+import { loadQuiz } from '../constants/quizCtrl';
 
 export default connect(
 	(state) => ({
@@ -12,10 +13,14 @@ export default connect(
 	}),	
 	(dispatch) => ({
 		onLoadQuiz: (quizName) => {
-			dispatch(changeQuizName(quizName));									
+			loadQuiz(quizName, function(quiz){
+				dispatch(changeQuiz(quiz));									
+			});
 		},
 		onChangeQuizName: (event) => {
-			dispatch(changeQuizName(event.target.value));									
+			loadQuiz(event.target.value, function(quiz){
+				dispatch(changeQuiz(quiz));									
+			});									
 		},
 		onChangeMode: (quizMode) => () => {
 			dispatch(changeMode(quizMode));							
