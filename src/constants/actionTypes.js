@@ -1,1 +1,2 @@
+export const CHANGE_QUIZNAME = 'CHANGE_QUIZNAME';
 export const CHANGE_MODE = 'CHANGE_MODE';

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Quiz = ({
+	onChangeQuizName,
 	quizName
 }) => (
 	<div className="container">
@@ -11,7 +12,7 @@ const Quiz = ({
 				</div>
 				<div className="col-md-4 header-right">
 				Select Quiz:
-				<select id="quizList" value={quizName}>
+				<select id="quizList" value={quizName} onChange={onChangeQuizName}>
 					<option value="data/aspnet.js">Asp.Net</option>
 					<option value="data/csharp.js">C Sharp</option>
 					<option value="data/desighPatterns.js">Design Patterns</option>
