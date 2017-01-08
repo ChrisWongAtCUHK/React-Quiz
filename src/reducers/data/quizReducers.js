@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { QuizState } from '../../constants/model';
+import { fromJS } from 'immutable';
 
 const defaultConfig = {
 	allowBack: true,
@@ -26,8 +27,7 @@ const quizReducers = handleActions({
 			// do nothing with the same quiz
 			return state;
 		}
-		let retState = state.setIn("quiz.Id".split("."), payload.quiz.Id)
-												.setIn("quiz.name".split("."), payload.quiz.name);
+		let retState = state.set("quiz", fromJS(payload.quiz));
 		return retState;								
 	},
 	CHANGE_MODE: (state, { payload }) => {
