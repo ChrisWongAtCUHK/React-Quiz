@@ -13,13 +13,13 @@ export default connect(
 	}),	
 	(dispatch) => ({
 		onLoadQuiz: (quizName) => {
-			loadQuiz(quizName, function(quiz){
-				dispatch(changeQuiz(quiz));									
+			loadQuiz(quizName, function(data){
+				dispatch(changeQuiz(data));									
 			});
 		},
 		onChangeQuizName: (event) => {
-			loadQuiz(event.target.value, function(quiz){
-				dispatch(changeQuiz(quiz));									
+			loadQuiz(event.target.value, function(data){
+				dispatch(changeQuiz(data));									
 			});									
 		},
 		onChangeMode: (quizMode) => () => {
