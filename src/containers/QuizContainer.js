@@ -4,7 +4,7 @@ import { changeMode } from '../actions';
 
 export default connect(
 	(state) => ({
-		mode: state.getIn(['quizReducers', 'mode'])
+		quizName: state.getIn(['quizReducers', 'quizName'])
 	}),	
 	(dispatch) => ({
 		onChangeMode: (quizMode) => () => {
