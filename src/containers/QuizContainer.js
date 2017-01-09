@@ -11,7 +11,8 @@ export default connect(
 		quizName: state.getIn(['quizReducers', 'quizName']),
 		quiz: state.getIn(['quizReducers', 'quiz']),
 		currentPage: state.getIn(['quizReducers', 'currentPage']),
-		totalItems: state.getIn(['quizReducers', 'totalItems'])
+		totalItems: state.getIn(['quizReducers', 'totalItems']),
+		filteredQuestions: state.getIn(['quizReducers', 'filteredQuestions'])
 	}),	
 	(dispatch) => ({
 		onLoadQuiz: (quizName) => {
