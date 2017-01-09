@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { fromJS } from 'immutable';
-import { QuizState } from '../../constants/model';
+import { defaultConfig, QuizState } from '../../constants/model';
 import { extend } from '../../constants/helperService';
 
 /*
@@ -13,9 +13,8 @@ const quizReducers = handleActions({
 			// do nothing with the same quiz
 			return state;
 		}
-		let config = state.get("config");
 		let retState = state.set("quiz", fromJS(payload.quiz))
-												.set("config", extend({}, config.toJS(), payload.config));
+												.set("config", extend({}, defaultConfig, payload.config));
 
 		return retState;								
 	},
