@@ -1,4 +1,4 @@
-export const shuffle = (array) => {
+export const shuffle = function(array) {
 	let currentIndex = array.length, temp, randomIndex;
 
 	while (0 !== currentIndex) {
@@ -12,7 +12,7 @@ export const shuffle = (array) => {
 	return array;
 };
 
-export const extend = (out) => {
+export const extend = function(out) {
 	out = out || {};
 
 	for(let i = 1; i < arguments.length; i++) {
@@ -24,4 +24,5 @@ export const extend = (out) => {
 				out[key] = arguments[i][key];
 		}
 	}
+	return out;
 };

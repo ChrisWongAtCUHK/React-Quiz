@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { fromJS } from 'immutable';
 import { defaultConfig, QuizState } from '../../constants/model';
-import { extend } from '../../constants/helperService';
+import { extend, shuffle } from '../../constants/helperService';
 
 /*
  * Handle all actions
@@ -13,8 +13,10 @@ const quizReducers = handleActions({
 			// do nothing with the same quiz
 			return state;
 		}
+		let config = extend({}, defaultConfig, payload.config);
+		let questions = config.shuffleQuestions ? shuffle(payload.questions) : payload.questions;
 		let retState = state.set("quiz", fromJS(payload.quiz))
-												.set("config", extend({}, defaultConfig, payload.config));
+												.set("config", fromJS(config));
 
 		return retState;								
 	},
