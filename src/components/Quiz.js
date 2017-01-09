@@ -9,7 +9,13 @@ const Quiz = ({
 	totalItems,
 	filteredQuestions
 }) => {
-	const debug = () => {
+	const debug = (fq) => {
+		if(fq){
+			console.log(fq.get('Name'));
+			console.log(fq.get('Options'));
+			console.log(fq.get('Options').get(0));
+			console.log(fq.get('Options').get(0).get('Id'));
+		}
 		return {"display": "block"};
 	};
 
@@ -43,8 +49,16 @@ const Quiz = ({
 								<div className="label label-warning">Question {currentPage} of {totalItems}.</div>
 								<div className="row">
 									<div className="col-md-12">
-										<h2>{currentPage}. <span>{filteredQuestion.get('Name')}</span></h2>
+										<h2>{currentPage}. <span className={debug(filteredQuestion)}>{filteredQuestion.get('Name')}</span></h2>
 									</div>
+								</div>
+								<div className="row text-left options">
+								{/*
+									// This does not work
+									filteredQuestion.get('Options').map((option, subIndex) => (
+										{option.get('Id')}	
+									)).toJS()
+								*/}
 								</div>
 							</div>
 						)).toJS()
