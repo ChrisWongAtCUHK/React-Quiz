@@ -4,7 +4,10 @@ const Quiz = ({
 	onLoadQuiz,
 	onChangeQuizName,
 	quiz,
-	quizName
+	quizName,
+	currentPage,
+	totalItems,
+	filteredQuestions
 }) => (
 	<div className="container" onLoad={onLoadQuiz(quizName)}>
 		<div className="header">
@@ -26,6 +29,11 @@ const Quiz = ({
 			<div id="quiz">
 				<div className="row">
 					<div className="col-md-12"><h1 className="center">{quiz.get('name')}</h1><hr /></div>
+				</div>
+			</div>
+			<div>
+				<div>
+			    <div className="label label-warning">Question {currentPage} of {totalItems}.</div>
 				</div>
 			</div>
 	</div>

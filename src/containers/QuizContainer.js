@@ -9,7 +9,9 @@ import { loadQuiz } from '../constants/quizCtrl';
 export default connect(
 	(state) => ({
 		quizName: state.getIn(['quizReducers', 'quizName']),
-		quiz: state.getIn(['quizReducers', 'quiz'])
+		quiz: state.getIn(['quizReducers', 'quiz']),
+		currentPage: state.getIn(['quizReducers', 'currentPage']),
+		totalItems: state.getIn(['quizReducers', 'totalItems'])
 	}),	
 	(dispatch) => ({
 		onLoadQuiz: (quizName) => {

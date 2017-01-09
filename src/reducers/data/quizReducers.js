@@ -15,8 +15,20 @@ const quizReducers = handleActions({
 		}
 		let config = extend({}, defaultConfig, payload.config);
 		let questions = config.shuffleQuestions ? shuffle(payload.questions) : payload.questions;
+		let itemsPerPage =  config.pageSize;
+		let currentPage = 1;
+		let begin = ((currentPage - 1) * itemsPerPage),
+			  end = begin + itemsPerPage;
+
+    let filteredQuestions = questions.slice(begin, end);
 		let retState = state.set("quiz", fromJS(payload.quiz))
-												.set("config", fromJS(config));
+												.set("config", fromJS(config))
+												.set("questions", questions)
+												.set("totalItems", questions.length)
+												.set("itemsPerPage", itemsPerPage)
+												.set("currentPage", currentPage)
+												.set("mode", quiz)
+												.set("filteredQuestions", filteredQuestions);
 
 		return retState;								
 	},
