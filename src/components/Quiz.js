@@ -9,13 +9,7 @@ const Quiz = ({
 	totalItems,
 	filteredQuestions
 }) => {
-	const debug = (fq) => {
-		if(fq){
-			console.log(fq.get('Name'));
-			console.log(fq.get('Options'));
-			console.log(fq.get('Options').get(0));
-			console.log(fq.get('Options').get(0).get('Id'));
-		}
+	const debug = () => {
 		return {"display": "block"};
 	};
 
@@ -41,28 +35,34 @@ const Quiz = ({
 					<div className="row">
 						<div className="col-md-12"><h1 className="center">{quiz.get('name')}</h1><hr /></div>
 					</div>
-				</div>
-				<div className={debug()}>
-					{
-						filteredQuestions.map((filteredQuestion, index) => (
-							<div key={index}>
-								<div className="label label-warning">Question {currentPage} of {totalItems}.</div>
-								<div className="row">
-									<div className="col-md-12">
-										<h2>{currentPage}. <span className={debug(filteredQuestion)}>{filteredQuestion.get('Name')}</span></h2>
+					<div className={debug()}>
+						{
+							filteredQuestions.map((filteredQuestion, index) => (
+								<div key={index}>
+									<div className="label label-warning">Question {currentPage} of {totalItems}.</div>
+									<div className="row">
+										<div className="col-md-12">
+											<h2>{currentPage}. <span>{filteredQuestion.get('Name')}</span></h2>
+										</div>
+									</div>
+									<div className="row text-left options">
+									{
+										filteredQuestion.get('Options').map((option, subIndex) => (
+											<div key={subIndex} className="col-md-6">
+												<div className="option">
+													<label htmlFor={option.get('Id')}>
+														<input id={option.get('Id')} type="checkbox" />
+														{option.get('Name')}
+													</label>
+												</div>	
+											</div>
+										)).toJS()
+									}
 									</div>
 								</div>
-								<div className="row text-left options">
-								{/*
-									// This does not work
-									filteredQuestion.get('Options').map((option, subIndex) => (
-										{option.get('Id')}	
-									)).toJS()
-								*/}
-								</div>
-							</div>
-						)).toJS()
-					}
+							)).toJS()
+						}
+					</div>
 				</div>
 		</div>
 	);
