@@ -33,6 +33,21 @@ const quizReducers = handleActions({
 		return retState;								
 	},
 	SELECT_OPTION: (state, { payload }) => {
+		// TODO: store the selected option
+		let config = state.get('config').toJS();
+		let currentPage = state.get('currentPage');
+		let totalItems = state.get('totalItems');
+		if (config.autoMove === true && currentPage < totalItems){
+			// move to next page
+			currentPage++;
+			let questions = state.get('questions');
+			let itemsPerPage = state.get('itemsPerPage');
+
+			let begin = (currentPage - 1) * itemsPerPage,
+					end = begin + itemsPerPage;
+			let filteredQuestions = questions.slice(begin, end);
+			return state.set('currentPage', currentPage).set('filteredQuestions', fromJS(filteredQuestions));
+		}
 		return state;							 
 	},
 	CHANGE_MODE: (state, { payload }) => {

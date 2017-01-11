@@ -13,6 +13,7 @@ export default connect(
 		quiz: state.getIn(['quizReducers', 'quiz']),
 		currentPage: state.getIn(['quizReducers', 'currentPage']),
 		totalItems: state.getIn(['quizReducers', 'totalItems']),
+		questions: state.getIn(['quizReducers', 'questions']),
 		filteredQuestions: state.getIn(['quizReducers', 'filteredQuestions'])
 	}),	
 	(dispatch) => ({

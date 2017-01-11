@@ -8,6 +8,7 @@ const Quiz = ({
 	quizName,
 	currentPage,
 	totalItems,
+	questions,
 	filteredQuestions
 }) => {
 	const debug = () => {
