@@ -53,7 +53,7 @@ const Quiz = ({
 											<div key={subIndex} className="col-md-6">
 												<div className="option">
 													<label htmlFor={option.get('Id')}>
-														<input id={option.get('Id')} type="checkbox" onChange={onSelectOption(question, option)}/>
+														<input id={option.get('Id')} type="checkbox" checked={false} onChange={onSelectOption(question, option)}/>
 														{option.get('Name')}
 													</label>
 												</div>	
