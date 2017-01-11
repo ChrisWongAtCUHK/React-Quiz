@@ -32,6 +32,9 @@ const quizReducers = handleActions({
 
 		return retState;								
 	},
+	SELECT_OPTION: (state, { payload }) => {
+		return state;							 
+	},
 	CHANGE_MODE: (state, { payload }) => {
 		return state.get("filteredQuestions");
 	}

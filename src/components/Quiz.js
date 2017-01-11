@@ -3,6 +3,7 @@ import React from 'react';
 const Quiz = ({
 	onLoadQuiz,
 	onChangeQuizName,
+	onSelectOption,
 	quiz,
 	quizName,
 	currentPage,
@@ -37,21 +38,21 @@ const Quiz = ({
 					</div>
 					<div className={debug()}>
 						{
-							filteredQuestions.map((filteredQuestion, index) => (
+							filteredQuestions.map((question, index) => (
 								<div key={index}>
 									<div className="label label-warning">Question {currentPage} of {totalItems}.</div>
 									<div className="row">
 										<div className="col-md-12">
-											<h2>{currentPage}. <span>{filteredQuestion.get('Name')}</span></h2>
+											<h2>{currentPage}. <span>{question.get('Name')}</span></h2>
 										</div>
 									</div>
 									<div className="row text-left options">
 									{
-										filteredQuestion.get('Options').map((option, subIndex) => (
+										question.get('Options').map((option, subIndex) => (
 											<div key={subIndex} className="col-md-6">
 												<div className="option">
 													<label htmlFor={option.get('Id')}>
-														<input id={option.get('Id')} type="checkbox" />
+														<input id={option.get('Id')} type="checkbox" onChange={onSelectOption(question, option)}/>
 														{option.get('Name')}
 													</label>
 												</div>	
