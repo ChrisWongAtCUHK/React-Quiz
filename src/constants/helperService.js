@@ -26,3 +26,12 @@ export const extend = function(out) {
 	}
 	return out;
 };
+
+/*
+ * Watch current page and items per page
+ * */
+export const watch = function(questions, currentPage, itemsPerPage) {
+	let begin = (currentPage - 1) * itemsPerPage,
+			end = begin + itemsPerPage;
+	return questions.slice(begin, end);
+};

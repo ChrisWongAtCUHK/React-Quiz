@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { fromJS } from 'immutable';
 import { defaultConfig, QuizState } from '../../constants/model';
-import { extend, shuffle } from '../../constants/helperService';
+import { extend, shuffle, watch } from '../../constants/helperService';
 
 /*
  * Handle all actions
@@ -17,10 +17,8 @@ const quizReducers = handleActions({
 		let questions = config.shuffleQuestions ? shuffle(payload.questions) : payload.questions;
 		let itemsPerPage =  config.pageSize;
 		let currentPage = 1;
-		let begin = ((currentPage - 1) * itemsPerPage),
-			  end = begin + itemsPerPage;
 
-    let filteredQuestions = questions.slice(begin, end);
+    let filteredQuestions = watch(questions, currentPage, itemsPerPage);
 		let retState = state.set("quiz", fromJS(payload.quiz))
 												.set("config", fromJS(config))
 												.set("questions", questions)
@@ -33,22 +31,40 @@ const quizReducers = handleActions({
 		return retState;								
 	},
 	SELECT_OPTION: (state, { payload }) => {
-		// TODO: store the selected option
+		// store the selected options
+		let questions = state.get('questions');
+		let question = payload.question;
+		let option = payload.option;
+		for(let key in question.Options) {
+			if(question.Options[key].Id === option.Id) {
+				question.Options[key].Selected = true;
+			} else {
+				question.Options[key].Selected = false;
+			}
+		}
+		for(let key in questions) {
+			if(questions[key].Id === question.Id) {
+				questions[key] = question;
+				break;
+			}
+		}
+
+		// move to next page, except the last page
 		let config = state.get('config').toJS();
 		let currentPage = state.get('currentPage');
 		let totalItems = state.get('totalItems');
+		let itemsPerPage = state.get('itemsPerPage');
 		if (config.autoMove === true && currentPage < totalItems){
-			// move to next page
 			currentPage++;
-			let questions = state.get('questions');
-			let itemsPerPage = state.get('itemsPerPage');
 
-			let begin = (currentPage - 1) * itemsPerPage,
-					end = begin + itemsPerPage;
-			let filteredQuestions = questions.slice(begin, end);
-			return state.set('currentPage', currentPage).set('filteredQuestions', fromJS(filteredQuestions));
+			let filteredQuestions = watch(questions, currentPage, itemsPerPage);
+			return state.set('currentPage', currentPage)
+									.set('filteredQuestions', fromJS(filteredQuestions))
+									.set('questions', questions);
 		}
-		return state;							 
+		let filteredQuestions = watch(questions, currentPage, itemsPerPage);
+		return state.set('filteredQuestions', fromJS(filteredQuestions))
+								.set('questions', questions);
 	},
 	CHANGE_MODE: (state, { payload }) => {
 		return state.get("filteredQuestions");
