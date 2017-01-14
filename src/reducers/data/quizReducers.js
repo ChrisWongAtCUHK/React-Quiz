@@ -21,7 +21,7 @@ const quizReducers = handleActions({
     let filteredQuestions = watch(questions, currentPage, itemsPerPage);
 		let retState = state.set("quiz", fromJS(payload.quiz))
 												.set("config", fromJS(config))
-												.set("questions", questions)
+												.set("questions", fromJS(questions))
 												.set("totalItems", questions.length)
 												.set("itemsPerPage", itemsPerPage)
 												.set("currentPage", currentPage)
@@ -31,7 +31,7 @@ const quizReducers = handleActions({
 	},
 	SELECT_OPTION: (state, { payload }) => {
 		// store the selected options
-		let questions = state.get('questions');
+		let questions = state.get('questions').toJS();
 		let question = payload.question;
 		let option = payload.option;
 		for(let key in question.Options) {
@@ -59,11 +59,11 @@ const quizReducers = handleActions({
 			let filteredQuestions = watch(questions, currentPage, itemsPerPage);
 			return state.set('currentPage', currentPage)
 									.set('filteredQuestions', fromJS(filteredQuestions))
-									.set('questions', questions);
+									.set('questions', fromJS(questions));
 		}
 		let filteredQuestions = watch(questions, currentPage, itemsPerPage);
 		return state.set('filteredQuestions', fromJS(filteredQuestions))
-								.set('questions', questions);
+								.set('questions', fromJS(questions));
 	},
 	// navigate to page
 	GO_TO: (state, { payload }) => {
