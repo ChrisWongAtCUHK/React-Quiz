@@ -84,6 +84,11 @@ const Quiz = ({
 					</div>
 				</div>
 				<hr />
+				<div className="" style={show(mode !== 'result', 'block')}>
+					<button className="btn btn-default">Quiz</button>{" "} 
+					<button className="btn btn-default">Review</button>{" " }
+					<button className="btn btn-default">Submit Quiz</button>
+				</div>
 		</div>
 	);
 };
