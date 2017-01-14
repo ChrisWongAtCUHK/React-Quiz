@@ -4,6 +4,8 @@ const Quiz = ({
 	onLoadQuiz,
 	onChangeQuizName,
 	onSelectOption,
+	mode,
+	config,
 	quiz,
 	quizName,
 	currentPage,
@@ -11,8 +13,12 @@ const Quiz = ({
 	questions,
 	filteredQuestions
 }) => {
-	const debug = () => {
-		return {"display": "block"};
+	const show = (tf, display) => {
+		if(tf === true) {
+			return { "display": display };
+		}
+		
+		return { "display": "none" };
 	};
 
 	return (
@@ -37,7 +43,7 @@ const Quiz = ({
 					<div className="row">
 						<div className="col-md-12"><h1 className="center">{quiz.get('name')}</h1><hr /></div>
 					</div>
-					<div className={debug()}>
+					<div className={show(mode === 'quiz', 'block')}>
 						{
 							filteredQuestions.map((question, index) => (
 								<div key={index}>
@@ -65,7 +71,18 @@ const Quiz = ({
 							)).toJS()
 						}
 					</div>
+					<hr />
+					<div className="quizNav">
+						<div>
+							<button className="btn btn-default" style={show(config.get('allowBack'), 'inline-block')}>First</button>{" "}
+							<button className="btn btn-default" style={show(config.get('allowBack'), 'inline-block')}>Prev</button>{" "}
+							<button className="btn btn-primary"                            >Next</button>{ " " }
+							<button className="btn btn-default" style={show(config.get('allowBack'), 'inline-block')}>Last</button>{" "}
+						</div>
+						<br />
+					</div>
 				</div>
+				<hr />
 		</div>
 	);
 };
