@@ -28,6 +28,6 @@ export const QuizState = Immutable.fromJS({
 	totalItems: 0,
 	itemsPerPage: 0,
 	currentPage: 0,
-	mode: "",
+	mode: "quiz",
 	filteredQuestions: []
 });

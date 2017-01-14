@@ -36,8 +36,8 @@ export default connect(
 		onGoTo: (index) => () => {
 			dispatch(goTo(index));			
 		},
-		onChangeMode: (quizMode) => () => {
-			dispatch(changeMode(quizMode));							
+		onChangeMode: (mode) => () => {
+			dispatch(changeMode(mode));							
 		}
 	})		
 )(Quiz);

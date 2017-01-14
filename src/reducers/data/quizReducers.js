@@ -25,7 +25,6 @@ const quizReducers = handleActions({
 												.set("totalItems", questions.length)
 												.set("itemsPerPage", itemsPerPage)
 												.set("currentPage", currentPage)
-												.set("mode", quiz)
 												.set("filteredQuestions", fromJS(filteredQuestions));
 
 		return retState;								
@@ -75,7 +74,7 @@ const quizReducers = handleActions({
 		return state;
 	},
 	CHANGE_MODE: (state, { payload }) => {
-		return state.get("filteredQuestions");
+		return state.set('mode', payload);
 	}
 }, QuizState);
 
