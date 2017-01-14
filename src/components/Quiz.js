@@ -4,6 +4,7 @@ const Quiz = ({
 	onLoadQuiz,
 	onChangeQuizName,
 	onSelectOption,
+	onGoTo,
 	mode,
 	config,
 	quiz,
@@ -74,10 +75,10 @@ const Quiz = ({
 					<hr />
 					<div className="quizNav">
 						<div>
-							<button className="btn btn-default" style={show(config.get('allowBack'), 'inline-block')}>First</button>{" "}
-							<button className="btn btn-default" style={show(config.get('allowBack'), 'inline-block')}>Prev</button>{" "}
-							<button className="btn btn-primary"                            >Next</button>{ " " }
-							<button className="btn btn-default" style={show(config.get('allowBack'), 'inline-block')}>Last</button>{" "}
+							<button className="btn btn-default" style={show(config.get('allowBack'), 'inline-block')} onClick={onGoTo(1)}>First</button>{" "}
+							<button className="btn btn-default" style={show(config.get('allowBack'), 'inline-block')} onClick={onGoTo(currentPage - 1)}>Prev</button>{" "}
+							<button className="btn btn-primary" onClick={onGoTo(currentPage + 1)}>Next</button>{ " " }
+							<button className="btn btn-default" style={show(config.get('allowBack'), 'inline-block')} onClick={onGoTo(totalItems)}>Last</button>{" "}
 						</div>
 						<br />
 					</div>

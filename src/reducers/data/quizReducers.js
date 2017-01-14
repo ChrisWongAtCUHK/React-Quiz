@@ -66,6 +66,14 @@ const quizReducers = handleActions({
 		return state.set('filteredQuestions', fromJS(filteredQuestions))
 								.set('questions', questions);
 	},
+	// navigate to page
+	GO_TO: (state, { payload }) => {
+		if (payload > 0 && payload <= state.get('totalItems')) {
+			return state.set('currentPage', payload)
+									.set('mode', 'quiz');
+		}
+		return state;
+	},
 	CHANGE_MODE: (state, { payload }) => {
 		return state.get("filteredQuestions");
 	}

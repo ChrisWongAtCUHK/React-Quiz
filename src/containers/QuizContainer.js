@@ -3,6 +3,7 @@ import Quiz from '../components/Quiz';
 import { 
 	changeQuiz, 
 	selectOption,
+	goTo,
 	changeMode 
 } from '../actions';
 import { loadQuiz } from '../constants/quizCtrl';
@@ -31,6 +32,9 @@ export default connect(
 			loadQuiz(event.target.value, function(data){
 				dispatch(changeQuiz(data));									
 			});									
+		},
+		onGoTo: (index) => () => {
+			dispatch(goTo(index));			
 		},
 		onChangeMode: (quizMode) => () => {
 			dispatch(changeMode(quizMode));							
