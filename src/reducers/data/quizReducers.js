@@ -63,13 +63,17 @@ const quizReducers = handleActions({
 		}
 		let filteredQuestions = watch(questions, currentPage, itemsPerPage);
 		return state.set('filteredQuestions', fromJS(filteredQuestions))
-								.set('questions', fromJS(questions));
+					.set('questions', fromJS(questions));
 	},
 	// navigate to page
 	GO_TO: (state, { payload }) => {
 		if (payload > 0 && payload <= state.get('totalItems')) {
-			return state.set('currentPage', payload)
-									.set('mode', 'quiz');
+			let questions = state.get('questions').toJS();
+			let itemsPerPage = state.get('itemsPerPage');
+			let filteredQuestions = watch(questions, payload, itemsPerPage);
+			return state.set('filteredQuestions', fromJS(filteredQuestions))
+						.set('currentPage', payload)
+						.set('mode', 'quiz');
 		}
 		return state;
 	},
