@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 const Quiz = ({
 	onLoadQuiz,
@@ -15,16 +16,6 @@ const Quiz = ({
 	questions,
 	filteredQuestions
 }) => {
-	/*
-	 * Show the element with conditional check
-	 */
-	const show = (tf, displayStyle) => {
-		if(tf === true)
-			return {display: displayStyle};
-			
-		return {display: "none"};
-	};
-
 	/*
 	 * Determine if a question is answered
 	 */
@@ -61,7 +52,7 @@ const Quiz = ({
 				<div className="row">
 					<div className="col-md-12"><h1 className="center">{quiz.get('name')}</h1><hr /></div>
 				</div>
-				<div style={show(mode === 'quiz', 'block')}>
+				<div className={classNames({'react-hide': mode !== 'quiz'})}>
 					{
 						filteredQuestions.map((question, index) => (
 							<div key={index}>
@@ -91,26 +82,26 @@ const Quiz = ({
 					<hr />
 					<div className="quizNav">
 						<div>
-							<button className="btn btn-default" style={show(config.get('allowBack'), 'inline-block')} onClick={onGoTo(1)}>First</button>{" "}
-							<button className="btn btn-default" style={show(config.get('allowBack'), 'inline-block')} onClick={onGoTo(currentPage - 1)}>Prev</button>{" "}
+							<button className={classNames('btn', 'btn-default', {'react-hide': !config.get('allowBack')})} onClick={onGoTo(1)}>First</button>{" "}
+							<button className={classNames('btn', 'btn-default', {'react-hide': !config.get('allowBack')})} onClick={onGoTo(currentPage - 1)}>Prev</button>{" "}
 							<button className="btn btn-primary" onClick={onGoTo(currentPage + 1)}>Next</button>{ " " }
-							<button className="btn btn-default" style={show(config.get('allowBack'), 'inline-block')} onClick={onGoTo(totalItems)}>Last</button>{" "}
+							<button className={classNames('btn', 'btn-default', {'react-hide': !config.get('allowBack')})} onClick={onGoTo(totalItems)}>Last</button>{" "}
 						</div>
 						<br />
 					</div>
 				</div>
 			</div>
-			<div className="row review" style={show(mode === 'review', 'block')}>
+			<div className={classNames('row', 'review', {'react-hide': mode !== 'review'})}>
 				{
 					questions.map((question, index) => (
 						<div className="col-sm-4" key={index}>
-							<div className={ isAnswered(index) === 'Answered'? 'answered': 'not-answered' }>{index + 1}. { isAnswered(index) }</div>
+							<div className={ isAnswered(index) === 'Answered'? 'answered': 'not-answered' }>{index + 1}. {isAnswered(index)}</div>
 						</div>
 					)).toJS()
 				}
 			</div>
 			<hr />
-			<div className="" style={show(mode !== 'result', 'block')}>
+			<div className={classNames({'react-hide': mode === 'result'})}>
 				<button className="btn btn-default" onClick={onChangeMode('quiz')}>Quiz</button>{" "} 
 				<button className="btn btn-default" onClick={onChangeMode('review')}>Review</button>{" " }
 				<button className="btn btn-default">Submit Quiz</button>
