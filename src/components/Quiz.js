@@ -22,13 +22,27 @@ const Quiz = ({
 	 */
     const isAnswered = (index) => {
         let answered = 'Not Answered';
-        questions.toJS()[index].Options.forEach(function (element, index, array) {
-            if (element.Selected === true) {
+        questions.toJS()[index].Options.forEach(function (option, index, array) {
+            if (option.Selected === true) {
                 answered = 'Answered';
                 return false;
             }
         });
         return answered;
+    };
+
+    /*
+	 * Determine if a question is answered correctly
+	 */
+    const isCorrect = (index) => {
+        let result = 'wrong';
+        questions.toJS()[index].Options.forEach(function (option, index, array) {
+            if (option.Selected === true && option.IsAnswer === true) {
+                result = 'correct';
+                return false;
+            }
+        });
+        return result;
     };
 
 	return (
@@ -114,10 +128,11 @@ const Quiz = ({
 										<div key={subIndex} className="col-md-6">
 											<input id={option.get('Id')} type="checkbox" disabled="disabled" checked={option.get('Selected') === true}/>
 		                            			{option.get('Name')}
-											</div>
+										</div>
 									)).toJS()
-								}	
+								}
 		                		</div>
+		                		<h4 className={classNames('alert', isCorrect(index) === 'correct'? 'alert-success': 'alert-danger')}>Your answer is {isCorrect(index)}.</h4>
 							</div>
 						</div>
 					)).toJS()

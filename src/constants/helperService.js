@@ -35,3 +35,4 @@ export const watch = function(questions, currentPage, itemsPerPage) {
 			end = begin + itemsPerPage;
 	return questions.slice(begin, end);
 };
+
