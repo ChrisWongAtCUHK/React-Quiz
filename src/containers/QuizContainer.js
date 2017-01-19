@@ -4,7 +4,8 @@ import {
 	changeQuiz, 
 	selectOption,
 	goTo,
-	changeMode 
+	changeMode,
+	submit
 } from '../actions';
 import { loadQuiz } from '../constants/quizCtrl';
 
@@ -25,7 +26,7 @@ export default connect(
 				dispatch(changeQuiz(data));									
 			});
 		},
-	  onSelectOption: (question, option) => () => {
+	  	onSelectOption: (question, option) => () => {
 			dispatch(selectOption({question: question.toJS(), option: option.toJS()}));								
 		},
 		onChangeQuizName: (event) => {
@@ -38,6 +39,9 @@ export default connect(
 		},
 		onChangeMode: (mode) => () => {
 			dispatch(changeMode(mode));							
+		},
+		onSubmitHandler: (mode) => () => {
+			dispatch(submit('result'));							
 		}
 	})		
 )(Quiz);

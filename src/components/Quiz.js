@@ -7,6 +7,7 @@ const Quiz = ({
 	onSelectOption,
 	onGoTo,
 	onChangeMode,
+	onSubmitHandler,
 	mode,
 	config,
 	quiz,
@@ -100,11 +101,34 @@ const Quiz = ({
 					)).toJS()
 				}
 			</div>
+			<div className={classNames('result', {'react-hide': mode !== 'result'})}>
+		        <h2>Quiz Result</h2>
+		        {
+		        	questions.map((question, index) => (
+						<div key={index}>
+							<div className="result-question">
+								<h4>{index + 1}. {question.get('Name')}</h4>
+		                		<div className="row">
+		                		{
+									question.get('Options').map((option, subIndex) => (
+										<div key={subIndex} className="col-md-6">
+											<input id={option.get('Id')} type="checkbox" disabled="disabled" checked={option.get('Selected') === true}/>
+		                            			{option.get('Name')}
+											</div>
+									)).toJS()
+								}	
+		                		</div>
+							</div>
+						</div>
+					)).toJS()
+		        }
+		        <h4 className="alert alert-info text-center">You may close this window now.</h4>
+		    </div>
 			<hr />
 			<div className={classNames({'react-hide': mode === 'result'})}>
 				<button className="btn btn-default" onClick={onChangeMode('quiz')}>Quiz</button>{" "} 
 				<button className="btn btn-default" onClick={onChangeMode('review')}>Review</button>{" " }
-				<button className="btn btn-default">Submit Quiz</button>
+				<button className="btn btn-default" onClick={onSubmitHandler('result')}>Submit Quiz</button>
 			</div>
 		</div>
 	);

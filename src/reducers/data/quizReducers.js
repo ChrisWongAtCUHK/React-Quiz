@@ -79,6 +79,9 @@ const quizReducers = handleActions({
 	},
 	CHANGE_MODE: (state, { payload }) => {
 		return state.set('mode', payload);
+	},
+	SUBMIT: (state, { payload }) => {
+		return state.set('mode', 'result');
 	}
 }, QuizState);
 
