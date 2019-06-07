@@ -1,4 +1,13 @@
 {
-  "main.js": "static/js/main.fdd98062.js",
-  "main.js.map": "static/js/main.fdd98062.js.map"
+  "files": {
+    "main.js": "/React-Quiz/static/js/main.e673eaf0.chunk.js",
+    "main.js.map": "/React-Quiz/static/js/main.e673eaf0.chunk.js.map",
+    "runtime~main.js": "/React-Quiz/static/js/runtime~main.231c92fb.js",
+    "runtime~main.js.map": "/React-Quiz/static/js/runtime~main.231c92fb.js.map",
+    "static/js/2.88f0dd14.chunk.js": "/React-Quiz/static/js/2.88f0dd14.chunk.js",
+    "static/js/2.88f0dd14.chunk.js.map": "/React-Quiz/static/js/2.88f0dd14.chunk.js.map",
+    "index.html": "/React-Quiz/index.html",
+    "precache-manifest.a2b5359785427cb179abeb8899f1e164.js": "/React-Quiz/precache-manifest.a2b5359785427cb179abeb8899f1e164.js",
+    "service-worker.js": "/React-Quiz/service-worker.js"
+  }
 }
