@@ -11,6 +11,7 @@
     "axios": "^0.19.0",
     "gh-pages": "^2.0.1",
     "immutable": "^4.0.0-rc.12",
+    "micromatch": "^4.0.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
