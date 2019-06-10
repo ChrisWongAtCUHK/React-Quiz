@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import { fromJS } from 'immutable';
 import FilteredQuestion from './FilteredQuestion';
 
 const Quiz = ({
@@ -71,16 +70,10 @@ const Quiz = ({
 				</div>
 				<div className={classNames({'react-hide': mode !== 'quiz'})}>
 					{
-						filteredQuestions.valueSeq().map((question, index) => (
-							<div key={index}>
-								{
-									console.log(question.get('Options'))
-								}
-								
-								<FilteredQuestion currentPage={currentPage} totalItems={totalItems} question={question} 
-									name={question.get('Name')} options={question.get('Options')} onSelectOption={onSelectOption}/>
-							</div>
-						)).toJS()
+						filteredQuestions.map((question, index) => (
+							<FilteredQuestion key={index} currentPage={currentPage} totalItems={totalItems} question={question} 
+								name={question.get('Name')} options={question.get('Options')} onSelectOption={onSelectOption}/>
+						))
 					}
 					<hr />
 					<div className="quizNav">
@@ -105,7 +98,7 @@ const Quiz = ({
 			</div>
 			<div className={classNames('result', {'react-hide': mode !== 'result'})}>
 		        <h2>Quiz Result</h2>
-		        {/* {
+		        {
 		        	questions.map((question, index) => (
 						<div key={index}>
 							<div className="result-question">
@@ -124,7 +117,7 @@ const Quiz = ({
 							</div>
 						</div>
 					)).toJS()
-		        } */}
+		        }
 		        <h4 className="alert alert-info text-center">You may close this window now.</h4>
 		    </div>
 			<hr />

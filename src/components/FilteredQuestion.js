@@ -1,4 +1,5 @@
 import React from 'react';
+import Option from './Option';
 
 const filteredQuestion = ({
     currentPage,
@@ -18,18 +19,9 @@ const filteredQuestion = ({
             </div>
             <div className="row text-left options">
             {
-                // options.map((option, subIndex) => (
-                    // console.log(subIndex)
-                    // <div key={subIndex} className="col-md-6">
-                    //     <div className="option">
-                    //         <label htmlFor={option.get('Id')}>
-                    //             <input id={option.get('Id')} type="checkbox" checked={option.get('Selected') === true} onChange={onSelectOption(question, option)}/>
-                    //             {option.get('Name')}
-                    //         </label>
-                    //     </div>	
-                    // </div>
-                // )).toJS()
-                // ))
+                options.map((option, subIndex) => (
+                    <Option key={subIndex} question={question} option={option} onSelectOption={onSelectOption}/>
+                ))
             }
             </div>
         </>
