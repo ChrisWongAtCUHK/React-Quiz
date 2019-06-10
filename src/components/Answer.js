@@ -22,5 +22,6 @@ const Answer = ({
             <div className={ isAnswered(index) === 'Answered'? 'answered': 'not-answered' }>{index + 1}. {isAnswered(index)}</div>
         </div>
     );
-}
+};
+
 export default Answer;

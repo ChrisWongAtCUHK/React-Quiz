@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import FilteredQuestion from './FilteredQuestion';
 import Answer from './Answer';
+import ResultQuestion from './ResultQuestion';
 
 const Quiz = ({
 	onLoadQuiz,
@@ -19,20 +20,6 @@ const Quiz = ({
 	questions,
 	filteredQuestions
 }) => {
-    /*
-	 * Determine if a question is answered correctly
-	 */
-    const isCorrect = (index) => {
-        let result = 'wrong';
-        questions.toJS()[index].Options.forEach(function (option, index, array) {
-            if (option.Selected === true && option.IsAnswer === true) {
-                result = 'correct';
-                return false;
-            }
-        });
-        return result;
-    };
-
 	return (
 		<div className="container" onLoad={onLoadQuiz(quizName)}>
 			<div className="header">
@@ -85,23 +72,8 @@ const Quiz = ({
 		        <h2>Quiz Result</h2>
 		        {
 		        	questions.map((question, index) => (
-						<div key={index}>
-							<div className="result-question">
-								<h4>{index + 1}. {question.get('Name')}</h4>
-		                		<div className="row">
-		                		{
-									question.get('Options').map((option, subIndex) => (
-										<div key={subIndex} className="col-md-6">
-											<input id={option.get('Id')} type="checkbox" disabled="disabled" checked={option.get('Selected') === true}/>
-		                            			{option.get('Name')}
-										</div>
-									)).toJS()
-								}
-		                		</div>
-		                		<h4 className={classNames('alert', isCorrect(index) === 'correct'? 'alert-success': 'alert-danger')}>Your answer is {isCorrect(index)}.</h4>
-							</div>
-						</div>
-					)).toJS()
+						<ResultQuestion key={index} questions={questions} index={index} question={question}/>
+					))
 		        }
 		        <h4 className="alert alert-info text-center">You may close this window now.</h4>
 		    </div>

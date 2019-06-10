@@ -26,6 +26,6 @@ const filteredQuestion = ({
             </div>
         </>
     );
-}
+};
 
 export default filteredQuestion;
