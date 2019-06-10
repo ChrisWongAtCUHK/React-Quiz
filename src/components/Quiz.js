@@ -30,9 +30,9 @@ const Quiz = ({
 					<div className="col-md-4 header-right">
 						Select Quiz:
 						<select id="quizList" value={quizName} onChange={onChangeQuizName}>
-							<option value="data/aspnet.js">Asp.Net</option>
-							<option value="data/csharp.js">C Sharp</option>
-							<option value="data/designPatterns.js">Design Patterns</option>
+							<option value="data/aspnet.json">Asp.Net</option>
+							<option value="data/csharp.json">C Sharp</option>
+							<option value="data/designPatterns.json">Design Patterns</option>
 						</select>
 					</div>
 				</div>

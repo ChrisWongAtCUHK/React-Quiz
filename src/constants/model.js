@@ -17,7 +17,7 @@ export const defaultConfig = {
 };
 
 export const QuizState = Immutable.fromJS({
-	quizName: "data/csharp.js",
+	quizName: "data/csharp.json",
 	quiz: {
 		Id: 0,
 		name: "",
