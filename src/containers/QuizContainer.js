@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import Quiz from '../components/Quiz';
 import { 
+	loadQuiz,
 	changeQuiz, 
 	selectOption,
 	goTo,
 	changeMode,
 	submit
 } from '../actions';
-import { loadQuiz } from '../constants/quizCtrl';
+import { getQuizFromFile } from '../constants/quizCtrl';
 
 export default connect(
 	(state) => ({
@@ -22,17 +23,15 @@ export default connect(
 	}),	
 	(dispatch) => ({
 		onLoadQuiz: (quizName) => {
-			loadQuiz(quizName, function(data){
-				dispatch(changeQuiz(data));									
+			getQuizFromFile(quizName, (data) => {
+				dispatch(loadQuiz(data));									
 			});
 		},
 	  	onSelectOption: (question, option) => () => {
 			dispatch(selectOption({question: question.toJS(), option: option.toJS()}));								
 		},
 		onChangeQuizName: (event) => {
-			loadQuiz(event.target.value, function(data){
-				dispatch(changeQuiz(data));									
-			});									
+			dispatch(changeQuiz(event.target.value));									
 		},
 		onGoTo: (index) => () => {
 			dispatch(goTo(index));			
