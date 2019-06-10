@@ -9,7 +9,7 @@ const filteredQuestion = ({
     options,
     onSelectOption
 }) => {
-    // for every 2 option, treat as a row
+    // for every 2 options, treat as a row
     const rows = [[]];
     let rowCounter = 0;
     options.forEach((option, index) =>{
