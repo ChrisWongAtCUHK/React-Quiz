@@ -10,12 +10,11 @@ const ResultQuestion = ({
     /*
 	 * Determine if a question is answered correctly
 	 */
-    const isCorrect = (index) => {
+    const isCorrect = () => {
         let result = 'wrong';
-        questions.toJS()[index].Options.forEach(function (option, index, array) {
+        question.toJS().Options.forEach(function (option) {
             if (option.Selected === true && option.IsAnswer === true) {
                 result = 'correct';
-                return false;
             }
         });
         return result;
@@ -27,11 +26,11 @@ const ResultQuestion = ({
             <div className="row">
             {
                 question.get('Options').map((option, subIndex) => (
-                    <CheckBox key={subIndex} option={option} />
+                    <CheckBox key={subIndex} option={option}/>
                 ))
             }
             </div>
-            <h4 className={classNames('alert', isCorrect(index) === 'correct'? 'alert-success': 'alert-danger')}>Your answer is {isCorrect(index)}.</h4>
+            <h4 className={classNames('alert', isCorrect(index) === 'correct'? 'alert-success': 'alert-danger')}>Your answer is {isCorrect()}.</h4>
         </div>
     );
 };
