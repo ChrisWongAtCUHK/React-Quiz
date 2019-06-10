@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import FilteredQuestion from './FilteredQuestion';
+import Answer from './Answer';
 
 const Quiz = ({
 	onLoadQuiz,
@@ -18,20 +19,6 @@ const Quiz = ({
 	questions,
 	filteredQuestions
 }) => {
-	/*
-	 * Determine if a question is answered
-	 */
-    const isAnswered = (index) => {
-        let answered = 'Not Answered';
-        questions.toJS()[index].Options.forEach(function (option, index, array) {
-            if (option.Selected === true) {
-                answered = 'Answered';
-                return false;
-            }
-        });
-        return answered;
-    };
-
     /*
 	 * Determine if a question is answered correctly
 	 */
@@ -90,10 +77,8 @@ const Quiz = ({
 			<div className={classNames('row', 'review', {'react-hide': mode !== 'review'})}>
 				{
 					questions.map((question, index) => (
-						<div className="col-sm-4" key={index}>
-							<div className={ isAnswered(index) === 'Answered'? 'answered': 'not-answered' }>{index + 1}. {isAnswered(index)}</div>
-						</div>
-					)).toJS()
+						<Answer key={index} questions={questions} index={index}/>
+					))
 				}
 			</div>
 			<div className={classNames('result', {'react-hide': mode !== 'result'})}>
