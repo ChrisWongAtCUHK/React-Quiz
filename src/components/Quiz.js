@@ -1,5 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
+import { fromJS } from 'immutable';
+import FilteredQuestion from './FilteredQuestion';
 
 const Quiz = ({
 	onLoadQuiz,
@@ -69,28 +71,14 @@ const Quiz = ({
 				</div>
 				<div className={classNames({'react-hide': mode !== 'quiz'})}>
 					{
-						filteredQuestions.map((question, index) => (
+						filteredQuestions.valueSeq().map((question, index) => (
 							<div key={index}>
-								<div className="label label-warning">Question {currentPage} of {totalItems}.</div>
-								<div className="row">
-									<div className="col-md-12">
-										<h2>{currentPage}. <span>{question.get('Name')}</span></h2>
-									</div>
-								</div>
-								<div className="row text-left options">
 								{
-									question.get('Options').map((option, subIndex) => (
-										<div key={subIndex} className="col-md-6">
-											<div className="option">
-												<label htmlFor={option.get('Id')}>
-													<input id={option.get('Id')} type="checkbox" checked={option.get('Selected') === true} onChange={onSelectOption(question, option)}/>
-													{option.get('Name')}
-												</label>
-											</div>	
-										</div>
-									)).toJS()
+									console.log(question.get('Options'))
 								}
-								</div>
+								
+								<FilteredQuestion currentPage={currentPage} totalItems={totalItems} question={question} 
+									name={question.get('Name')} options={question.get('Options')} onSelectOption={onSelectOption}/>
 							</div>
 						)).toJS()
 					}
@@ -117,7 +105,7 @@ const Quiz = ({
 			</div>
 			<div className={classNames('result', {'react-hide': mode !== 'result'})}>
 		        <h2>Quiz Result</h2>
-		        {
+		        {/* {
 		        	questions.map((question, index) => (
 						<div key={index}>
 							<div className="result-question">
@@ -136,7 +124,7 @@ const Quiz = ({
 							</div>
 						</div>
 					)).toJS()
-		        }
+		        } */}
 		        <h4 className="alert alert-info text-center">You may close this window now.</h4>
 		    </div>
 			<hr />
