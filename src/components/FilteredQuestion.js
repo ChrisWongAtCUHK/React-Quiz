@@ -25,7 +25,8 @@ const filteredQuestion = ({
             <div className="label label-warning">Question {currentPage} of {totalItems}.</div>
             <div className="row">
                 <div className="col-md-12">
-                    <h2>{currentPage}. <span>{name}</span></h2>
+                    {/* display the html for question name */}
+                    <h2>{currentPage}. <span dangerouslySetInnerHTML={{__html: name}}></span></h2>
                 </div>
             </div>
             <div className="row text-left options">
